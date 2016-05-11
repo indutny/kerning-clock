@@ -83,9 +83,9 @@
   function setTime(h, m, s, ms) {
     h %= 12;
 
-    var hourIndex = Math.ceil((h / 12) * hours.length);
-    var minuteIndex = Math.ceil((m / 60) * minutes.length);
-    var secondIndex = Math.ceil((s / 60) * seconds.length);
+    var hourIndex = Math.floor((h / 12) * hours.length);
+    var minuteIndex = Math.floor((m / 60) * minutes.length);
+    var secondIndex = Math.floor((s / 60) * seconds.length);
 
     // Reset
     reset(hourIndex, minuteIndex, secondIndex);
