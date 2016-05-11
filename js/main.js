@@ -1,22 +1,20 @@
-'use strict';
-
 (() => {
-  const svg = document.getElementById('content');
-  const hours = document.getElementById('hours').getElementsByTagName('path');
-  const minutes = document.getElementById('minutes')
+  var svg = document.getElementById('content');
+  var hours = document.getElementById('hours').getElementsByTagName('path');
+  var minutes = document.getElementById('minutes')
       .getElementsByTagName('path');
-  const seconds = document.getElementById('seconds')
+  var seconds = document.getElementById('seconds')
       .getElementsByTagName('path');
 
-  const transforms = {
+  var transforms = {
     hours: [],
     minutes: [],
     seconds: []
   };
 
   function createTransforms(letters, list) {
-    for (let i = 0; i < letters.length; i++) {
-      const transform = svg.createSVGTransform();
+    for (var i = 0; i < letters.length; i++) {
+      var transform = svg.createSVGTransform();
       letters[i].transform.baseVal.appendItem(transform);
       list.push(transform);
     }
@@ -27,7 +25,7 @@
   createTransforms(seconds, transforms.seconds);
 
   function translate(transform, value) {
-    const old = transform.matrix.e;
+    var old = transform.matrix.e;
     transform.setTranslate(value * (1 / 5) + old * (4 / 5), 0);
   }
 
@@ -44,21 +42,21 @@
   }
 
   function reset(h, m, s) {
-    for (let i = 0; i < hours.length; i++)
+    for (var i = 0; i < hours.length; i++)
       if (i !== h)
         setHour(i, 0);
 
-    for (let i = 0; i < minutes.length; i++)
+    for (var i = 0; i < minutes.length; i++)
       if (i !== m)
         setMinute(i, 0);
 
-    for (let i = 0; i < seconds.length; i++)
+    for (var i = 0; i < seconds.length; i++)
       if (i !== s)
         setSecond(i, 0);
   }
 
   function getX(list, index, value) {
-    let adj;
+    var adj;
 
     // First letter can move only forward
     if (index === 0) {
@@ -85,11 +83,9 @@
   function setTime(h, m, s, ms) {
     h %= 12;
 
-    const hourIndex = Math.ceil((h / 12) * hours.length);
-    const minuteIndex = Math.ceil((m / 60) * minutes.length);
-    const secondIndex = Math.ceil((s / 60) * seconds.length);
-
-    console.log(`${h}:${m}:${s} => ${hourIndex}:${minuteIndex}:${secondIndex}`);
+    var hourIndex = Math.ceil((h / 12) * hours.length);
+    var minuteIndex = Math.ceil((m / 60) * minutes.length);
+    var secondIndex = Math.ceil((s / 60) * seconds.length);
 
     // Reset
     reset(hourIndex, minuteIndex, secondIndex);
@@ -100,8 +96,8 @@
     setSecond(secondIndex, getX(seconds, secondIndex, ms / 1000) * 8.26);
   }
 
-  const update = () => {
-    const now = new Date();
+  var update = () => {
+    var now = new Date();
     setTime(now.getHours(), now.getMinutes(), now.getSeconds(),
             now.getMilliseconds());
   };
