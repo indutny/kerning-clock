@@ -1,4 +1,4 @@
-(() => {
+(function() {
   var svg = document.getElementById('content');
   var hours = document.getElementById('hours').getElementsByTagName('path');
   var minutes = document.getElementById('minutes')
@@ -96,7 +96,7 @@
     setSecond(secondIndex, getX(seconds, secondIndex, ms / 1000) * 8.26);
   }
 
-  var update = () => {
+  function update() {
     var now = new Date();
     setTime(now.getHours(), now.getMinutes(), now.getSeconds(),
             now.getMilliseconds());
